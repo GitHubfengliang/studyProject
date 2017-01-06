@@ -109,16 +109,14 @@ define(
 
                         $curLi.toggleClass('licolor',false);
                         $curLi.prev().toggleClass('licolor',true);
-                        $liTop = util.getFixedOffset($('.licolor')).top;
+                        var $liTop = util.getFixedOffset($curLi).top-3;
 
-                        if($liTop - $ulTop < 0){
+                        if($liTop-$liHeight - $ulTop < 0){
                             ulScroll= ulScroll-$curLi.height();
                             $dropUl.scrollTop(ulScroll,0);
 
                         }
-                        //if($liTop<$ulHeight){
-                        //    $dropUl.scrollTop($liTop,0);
-                        //}
+
                         var isTop = $('.licolor').position().top;
                         var prevNum = $curLi.prevAll().length;
 
@@ -128,7 +126,7 @@ define(
                         }else if(isTop>$ulHeight){
                             $dropUl.scrollTop((prevNum-1)*$liHeight,0);
                         }
-                        //console.log(isTop);
+                        //console.log($liTop-$liHeight - $ulTop);
                         //console.log((prevNum-1)*$liHeight);
                     }else{
                         $dropUl.scrollTop(0,0);
@@ -138,9 +136,9 @@ define(
 
                         $curLi.toggleClass('licolor',false);
                         $curLi.next().toggleClass('licolor',true);
-                        $liTop = util.getFixedOffset($('.licolor')).top;
+                        var $liTop = util.getFixedOffset($curLi).top-3;
 
-                        if($liTop-$ulTop >= $ulHeight) {
+                        if($liTop+$liHeight-$ulTop >= $ulHeight) {
                             ulScroll= ulScroll+$curLi.height();
                             $dropUl.scrollTop(ulScroll,0);
                         }
@@ -155,8 +153,8 @@ define(
                             $dropUl.scrollTop((prevNum-1)*$liHeight,0);
                         }
 
-                        //console.log(isTop);
-                        //console.log($ulHeight);
+                        //console.log($liTop+$liHeight-$ulTop);
+                        //console.log($ulTop);
                         //console.log();
                     }else{
                         $dropUl.scrollTop(($dropUl.children('li').length)*$liHeight-$ulHeight,0);
